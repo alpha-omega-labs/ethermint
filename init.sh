@@ -1,8 +1,8 @@
 #!/bin/bash
 
-KEY="mykey"
-CHAINID="ethermint_9000-1"
-MONIKER="localtestnet"
+KEY="nodeonekey"
+CHAINID="genesis_1000-1"
+MONIKER="nodeone"
 KEYRING="test"
 KEYALGO="eth_secp256k1"
 LOGLEVEL="info"
@@ -37,7 +37,7 @@ cat $HOME/.ethermintd/config/genesis.json | jq '.app_state["mint"]["params"]["mi
 cat $HOME/.ethermintd/config/genesis.json | jq '.consensus_params["block"]["time_iota_ms"]="1000"' > $HOME/.ethermintd/config/tmp_genesis.json && mv $HOME/.ethermintd/config/tmp_genesis.json $HOME/.ethermintd/config/genesis.json
 
 # Set gas limit in genesis
-cat $HOME/.ethermintd/config/genesis.json | jq '.consensus_params["block"]["max_gas"]="10000000"' > $HOME/.ethermintd/config/tmp_genesis.json && mv $HOME/.ethermintd/config/tmp_genesis.json $HOME/.ethermintd/config/genesis.json
+cat $HOME/.ethermintd/config/genesis.json | jq '.consensus_params["block"]["max_gas"]="100000000"' > $HOME/.ethermintd/config/tmp_genesis.json && mv $HOME/.ethermintd/config/tmp_genesis.json $HOME/.ethermintd/config/genesis.json
 
 # disable produce empty block
 if [[ "$OSTYPE" == "darwin"* ]]; then
@@ -71,7 +71,7 @@ if [[ $1 == "pending" ]]; then
 fi
 
 # Allocate genesis accounts (cosmos formatted addresses)
-ethermintd add-genesis-account $KEY 100000000000000000000000000aphoton --keyring-backend $KEYRING
+ethermintd add-genesis-account $KEY 21000000000000000000000000aphoton --keyring-backend $KEYRING
 
 # Sign genesis transaction
 ethermintd gentx $KEY 1000000000000000000000aphoton --keyring-backend $KEYRING --chain-id $CHAINID
