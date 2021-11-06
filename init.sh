@@ -1,8 +1,8 @@
 #!/bin/bash
 
-KEY="mykey"
-CHAINID="ethermint_9000-1"
-MONIKER="localtestnet"
+KEY="nodeonekey"
+CHAINID="ethermint_1000-1"
+MONIKER="nodeone"
 KEYRING="test"
 KEYALGO="eth_secp256k1"
 LOGLEVEL="info"
@@ -71,7 +71,7 @@ if [[ $1 == "pending" ]]; then
 fi
 
 # Allocate genesis accounts (cosmos formatted addresses)
-ethermintd add-genesis-account $KEY 100000000000000000000000000aphoton --keyring-backend $KEYRING
+ethermintd add-genesis-account $KEY 21000000000000000000000000aphoton --keyring-backend $KEYRING
 
 # Sign genesis transaction
 ethermintd gentx $KEY 1000000000000000000000aphoton --keyring-backend $KEYRING --chain-id $CHAINID
@@ -87,4 +87,4 @@ if [[ $1 == "pending" ]]; then
 fi
 
 # Start the node (remove the --pruning=nothing flag if historical queries are not needed)
-ethermintd start --pruning=nothing $TRACE --log_level $LOGLEVEL --minimum-gas-prices=0.0001aphoton --json-rpc.api eth,txpool,personal,net,debug,web3,miner
+ethermintd start --pruning=nothing $TRACE --log_level $LOGLEVEL --minimum-gas-prices=1aphoton --json-rpc.api eth,txpool,personal,net,debug,web3,miner
